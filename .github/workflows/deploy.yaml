@@ -1,0 +1,22 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Decrypt deploy-keys.json
+        run: .github/scripts/decrypt_secret.sh tools-kanziw-dev-deploy-keys.json
+        env:
+          SECRET_PASSPHRASE: ${{ secrets.SECRET_PASSPHRASE }}
+      - name: Deploy to GAE using Actions
+        uses: ./.github/actions/gcloud_sdk
