@@ -1,0 +1,15 @@
+# https://cloud.google.com/appengine/docs/standard/nodejs/config/appref
+runtime: nodejs10
+
+env_variables:
+  PORT: 8080
+
+handlers:
+  - url: /.*
+    script: auto
+    secure: always
+    redirect_http_response_code: 301
+
+automatic_scaling:
+  min_instances: 1
+  max_instances: 1
