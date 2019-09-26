@@ -1,5 +1,0 @@
-name: 'Deploy to GAE'
-description: 'Deploy to GAE using google/gcloud-sdk docker image'
-runs:
-  using: 'docker'
-  image: 'Dockerfile'

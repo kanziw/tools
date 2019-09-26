@@ -9,6 +9,7 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-18.04
+    container: google/cloud-sdk:264.0.0-alpine
     steps:
       - name: Checkout
         uses: actions/checkout@v1
@@ -18,5 +19,8 @@ jobs:
         run: .github/scripts/decrypt_secret.sh tools-kanziw-dev-deploy-keys.json
         env:
           SECRET_PASSPHRASE: ${{ secrets.SECRET_PASSPHRASE }}
-      - name: Deploy to GAE using Actions
-        uses: ./.github/actions/gcloud_sdk
+      - name: Deploy to GAE
+        run: |
+          gcloud auth activate-service-account \
+            --key-file=$HOME/secrets/tools-kanziw-dev-deploy-keys.json && \
+          gcloud app deploy --project=tools-kanziw-dev
