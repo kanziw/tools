@@ -1,0 +1,23 @@
+{
+  "name": "tools",
+  "version": "0.0.1",
+  "description": "https://tools.kanziw.dev",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js"
+  },
+  "keywords": [
+    "tools"
+  ],
+  "author": {
+    "name": "kanziw",
+    "email": "kanziw@gmail.com",
+    "url": "https://kanziw.dev"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^12.7.8",
+    "nodemon": "^1.19.2"
+  }
+}
