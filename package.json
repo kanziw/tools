@@ -6,9 +6,7 @@
   "scripts": {
     "dev": "nodemon src/index.js",
     "lint": "eslint src",
-    "start": "node src/index.js",
-    "deploy": "gcloud app deploy",
-    "logs": "gcloud app logs tail -s default"
+    "start": "node src/index.js"
   },
   "keywords": [
     "tools"
