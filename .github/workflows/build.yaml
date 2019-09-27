@@ -17,5 +17,16 @@ jobs:
           node-version: '10'
       - name: Install Dependencies
         run: npm ci
-      - name: Lint
+      - name: Check Lint
         run: npm run lint
+
+  build:
+    name: Build
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Docker build
+        run: docker build . -t kanziw/tools-kanziw-dev:$GITHUB_SHA

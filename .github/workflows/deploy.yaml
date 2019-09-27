@@ -20,6 +20,6 @@ jobs:
           DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
         run: |
           echo $DEPLOY_KEY > deploy-key.json
-          gcloud auth activate-service-account --key-file=deploy-key.json
+          gcloud auth activate-service-account --key-file=deploy-key.json && \
           gcloud app deploy --project=tools-kanziw-dev
           rm deploy-key.json

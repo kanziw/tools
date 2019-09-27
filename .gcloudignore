@@ -16,7 +16,9 @@
 # Node.js dependencies:
 node_modules/
 
+# Web
+web/build/
+
 # Custom
 .idea/
 .eslintrc.js
-Dockerfile
