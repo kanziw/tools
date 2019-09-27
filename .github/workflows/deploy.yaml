@@ -1,9 +1,10 @@
 name: Deploy
 
-on:
-  push:
-    branches:
-      - master
+#on:
+#  push:
+#    branches:
+#      - master
+on: [push, pull_request]
 
 jobs:
   deploy:
@@ -15,12 +16,11 @@ jobs:
         uses: actions/checkout@v1
         with:
           fetch-depth: 1
-      - name: Decrypt deploy-keys.json
-        run: .github/scripts/decrypt_secret.sh tools-kanziw-dev-deploy-keys.json
-        env:
-          SECRET_PASSPHRASE: ${{ secrets.SECRET_PASSPHRASE }}
       - name: Deploy to GAE
+        env:
+          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
         run: |
-          gcloud auth activate-service-account \
-            --key-file=$HOME/secrets/tools-kanziw-dev-deploy-keys.json && \
+          echo $DEPLOY_KEY > deploy-key.json
+          gcloud auth activate-service-account --key-file=deploy-key.json
           gcloud app deploy --project=tools-kanziw-dev
+          rm deploy-key.json
