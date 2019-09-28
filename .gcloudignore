@@ -16,9 +16,13 @@
 # Node.js dependencies:
 node_modules/
 
+# Server
+dist/
+
 # Web
 web/build/
 
 # Custom
 .idea/
 .eslintrc.js
+jest.config.ts
