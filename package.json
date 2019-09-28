@@ -32,6 +32,7 @@
     "@types/jest": "^24.0.18",
     "@types/morgan": "^1.7.37",
     "@types/node": "^12.7.8",
+    "@types/supertest": "^2.0.8",
     "@typescript-eslint/eslint-plugin": "^2.3.1",
     "@typescript-eslint/parser": "^2.3.1",
     "babel-plugin-module-resolver": "^3.2.0",
