@@ -10,7 +10,7 @@
     "prebuild": "rm -rf dist/",
     "build:js": "babel src --out-dir dist --extensions '.ts'",
     "build:types": "tsc --emitDeclarationOnly --noEmit false -d",
-    "build": "yarn build:js",
+    "build": "npm run build:js",
     "start": "node dist/index.js",
     "test": "jest"
   },

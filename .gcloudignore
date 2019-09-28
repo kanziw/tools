@@ -18,6 +18,7 @@ node_modules/
 
 # Server
 dist/
+src/__tests__/
 
 # Web
 web/build/
@@ -25,4 +26,4 @@ web/build/
 # Custom
 .idea/
 .eslintrc.js
-jest.config.ts
+jest.config.js

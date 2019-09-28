@@ -6,7 +6,7 @@ import { isProd, VERSION } from './config'
 const app = Express()
 app.use(morgan('tiny'))
 
-app.get('/hi', (_, res) => {
+app.get('/hi', (_, res: Response) => {
   res.send(`hi? I'm tools with version ${VERSION}`)
 })
 
