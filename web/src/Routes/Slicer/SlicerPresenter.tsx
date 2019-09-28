@@ -1,4 +1,4 @@
-import { Form, Icon, Upload } from 'antd'
+import { Form, Icon, InputNumber, Upload } from 'antd'
 import { GetFieldDecoratorOptions } from 'antd/lib/form/Form'
 import { RcFile, UploadChangeParam } from 'antd/lib/upload'
 import { UploadFile } from 'antd/lib/upload/interface'
@@ -18,8 +18,17 @@ const formItemLayout = {
   wrapperCol: { span: 14 },
 }
 
+const MIN_VALUE = 10
+const MAX_VALUE = 2000000
+const DEFAULT_VALUE = 50000
+
 const SlicerPresenter: FC<Props> = ({ getFieldDecorator, normFile, hijackFile }) => (
   <Form {...formItemLayout}>
+    <Form.Item label="Slice size">
+      {getFieldDecorator('input-number', { initialValue: DEFAULT_VALUE })(
+        <InputNumber min={MIN_VALUE} max={MAX_VALUE} />,
+      )}
+    </Form.Item>
     <Form.Item>
       {getFieldDecorator('dragger', {
         valuePropName: 'fileList',

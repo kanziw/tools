@@ -1,6 +1,6 @@
 const slicer = <T>(
   arr: Array<T>,
-  num: number,
+  size: number,
   result: Array<Array<T>> = [],
 ): Array<Array<T>> => {
   if (!Array.isArray(arr)) {
@@ -8,8 +8,8 @@ const slicer = <T>(
   }
   if (!arr.length) { return result }
 
-  const [ sliced, remain ] = [ arr.slice(0, num), arr.slice(num) ]
-  return slicer(remain, num, result.concat([ sliced ]))
+  const [ sliced, remain ] = [ arr.slice(0, size), arr.slice(size) ]
+  return slicer(remain, size, result.concat([ sliced ]))
 }
 
 export default slicer

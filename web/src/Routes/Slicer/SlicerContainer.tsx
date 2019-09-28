@@ -34,10 +34,11 @@ class SliceContainer extends Component<FormComponentProps, State> {
   )
 
   hijackFile = (file: RcFile): boolean => {
+    const size = this.props.form.getFieldValue('input-number')
     const fileReader = new FileReader()
     fileReader.onload = () => {
       const { result: text } = fileReader as { result: string }
-      const results = slicer<object>(JSON.parse(text), 20)
+      const results = slicer<object>(JSON.parse(text), size)
       results.forEach(this.saveJson(file.name, results.length))
     }
     fileReader.readAsText(file)
