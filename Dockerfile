@@ -11,7 +11,7 @@ FROM node:10.16.3-alpine as web-builder
 
 WORKDIR /app
 COPY ./web/public ./public
-COPY ./web/package.json web/package-lock.json web/jsconfig.json ./
+COPY ./web/package.json web/package-lock.json web/tsconfig.json ./
 COPY ./web/src ./src
 
 RUN npm ci && npm run build
