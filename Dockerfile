@@ -2,7 +2,7 @@ FROM node:10.16.3-alpine as server-builder
 
 WORKDIR /app
 COPY package.json package-lock.json tsconfig.json .babelrc ./
-COPY ./src ./src
+COPY src src
 
 RUN npm ci && npm run build
 
@@ -10,9 +10,10 @@ RUN npm ci && npm run build
 FROM node:10.16.3-alpine as web-builder
 
 WORKDIR /app
-COPY ./web/public ./public
-COPY ./web/package.json web/package-lock.json web/tsconfig.json ./
-COPY ./web/src ./src
+COPY web/package.json web/package-lock.json ./
+COPY web/tsconfig.json web/config-overrides.js ./
+COPY web/public public
+COPY web/src src
 
 RUN npm ci && npm run build
 
