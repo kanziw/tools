@@ -20,8 +20,8 @@ jobs:
       - name: Check Lint
         run: npm run lint
 
-  tests:
-    name: Test
+  test-server:
+    name: Test - Server
     runs-on: ubuntu-18.04
     steps:
       - name: Checkout
@@ -36,6 +36,25 @@ jobs:
         run: npm ci
       - name: Run test
         run: npm run test
+
+  test-web:
+    name: Test - Web
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10'
+      - name: Install Dependencies
+        working-directory: web
+        run: npm ci
+      - name: Run test
+        working-directory: web
+        run: npm run test -- --watchAll=false
 
   build:
     name: Build
