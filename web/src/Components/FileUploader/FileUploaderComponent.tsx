@@ -2,13 +2,26 @@ import { Form, Icon, Upload } from 'antd'
 import { FormComponentProps } from 'antd/lib/form'
 import { RcFile, UploadChangeParam } from 'antd/lib/upload'
 import { UploadFile } from 'antd/lib/upload/interface'
+import { saveAs } from 'file-saver'
 import React, { Component } from 'react'
 
-class Demo extends Component<FormComponentProps> {
+class Demo extends Component<FormComponentProps, { num: number }> {
+  state = { num: 0 }
+
   beforeUpload = (file: RcFile): boolean => {
     const fileReader = new FileReader()
     fileReader.onload = () => {
-      console.log('JSON:', fileReader.result)
+      this.setState(({ num: prevNum }) => {
+        const { result: json } = fileReader
+        const num = prevNum + 1
+        saveAs(
+          new Blob([ String(json) ],
+            { type: 'text/plain;charset=utf-8' },
+          ),
+          `${num}.json`,
+        )
+        return { num }
+      })
     }
     fileReader.readAsText(file)
     return false
