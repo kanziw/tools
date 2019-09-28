@@ -1,3 +1,6 @@
+// @ts-ignore
+import { version as VERSION } from '../package.json'
+
 const e = process.env
 
 const s = <T>(prop: string, defaultValue?: T): T | string | undefined => (
@@ -10,4 +13,4 @@ const n = (prop: string, defaultValue?: number): number | undefined => (
 const PORT = n('PORT', 8080)
 const isProd = s('NODE_ENV') === 'production'
 
-export { PORT, isProd }
+export { VERSION, PORT, isProd }
