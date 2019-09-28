@@ -1,5 +1,6 @@
+import { FileUploader } from 'Components'
 import React from 'react'
 
-const SlicerPresenter = () => <h1>Slicer</h1>
+const SlicerPresenter = () => <FileUploader />
 
 export default SlicerPresenter
