@@ -1,16 +1,13 @@
 import { Form, Icon, InputNumber, Upload } from 'antd'
-import { GetFieldDecoratorOptions } from 'antd/lib/form/Form'
-import { RcFile, UploadChangeParam } from 'antd/lib/upload'
-import { UploadFile } from 'antd/lib/upload/interface'
+import { RcFile } from 'antd/lib/upload'
 import React, { FC } from 'react'
 
 interface Props {
-  getFieldDecorator: <T extends Object = {}>(
-    id: keyof T,
-    options?: GetFieldDecoratorOptions,
-  ) => ((node: React.ReactNode) => React.ReactNode)
-  normFile: (event: UploadChangeParam) => Array<UploadFile>
+  withSliceSizeValidation: (node: React.ReactNode) => React.ReactNode
+  withDraggerValidation: (node: React.ReactNode) => React.ReactNode
   hijackFile: (file: RcFile) => boolean
+  SLICE_SIZE_MIN_VALUE: number
+  SLICE_SIZE_MAX_VALUE: number
 }
 
 const formItemLayout = {
@@ -18,22 +15,21 @@ const formItemLayout = {
   wrapperCol: { span: 14 },
 }
 
-const MIN_VALUE = 10
-const MAX_VALUE = 2000000
-const DEFAULT_VALUE = 50000
-
-const SlicerPresenter: FC<Props> = ({ getFieldDecorator, normFile, hijackFile }) => (
+const SlicerPresenter: FC<Props> = ({
+  withSliceSizeValidation,
+  withDraggerValidation,
+  hijackFile,
+  SLICE_SIZE_MIN_VALUE,
+  SLICE_SIZE_MAX_VALUE,
+}) => (
   <Form {...formItemLayout}>
     <Form.Item label="Slice size">
-      {getFieldDecorator('input-number', { initialValue: DEFAULT_VALUE })(
-        <InputNumber min={MIN_VALUE} max={MAX_VALUE} />,
+      {withSliceSizeValidation(
+        <InputNumber min={SLICE_SIZE_MIN_VALUE} max={SLICE_SIZE_MAX_VALUE} />,
       )}
     </Form.Item>
     <Form.Item>
-      {getFieldDecorator('dragger', {
-        valuePropName: 'fileList',
-        getValueFromEvent: normFile,
-      })(
+      {withDraggerValidation(
         <Upload.Dragger
           name="files"
           accept=".json"

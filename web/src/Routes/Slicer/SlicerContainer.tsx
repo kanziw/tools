@@ -7,6 +7,10 @@ import React, { Component } from 'react'
 import { formatNumber, slicer } from 'utils'
 import SlicerPresenter from './SlicerPresenter'
 
+const SLICE_SIZE_DEFAULT_VALUE = 50000
+const SLICE_SIZE_MIN_VALUE = 10
+const SLICE_SIZE_MAX_VALUE = 2000000
+
 interface State {
   num: number
 }
@@ -47,14 +51,32 @@ class SliceContainer extends Component<FormComponentProps, State> {
 
   normFile = ({ fileList }: UploadChangeParam): Array<UploadFile> => fileList
 
-  render() {
-    const { getFieldDecorator } = this.props.form
-    return <SlicerPresenter
-      getFieldDecorator={getFieldDecorator}
-      normFile={this.normFile}
+  withSliceSizeValidation: (node: React.ReactNode) => React.ReactNode = (
+    this.props.form.getFieldDecorator(
+      'input-number',
+      { initialValue: SLICE_SIZE_DEFAULT_VALUE },
+    )
+  )
+
+  withDraggerValidation: (node: React.ReactNode) => React.ReactNode = (
+    this.props.form.getFieldDecorator(
+      'dragger',
+      {
+        valuePropName: 'fileList',
+        getValueFromEvent: this.normFile,
+      },
+    )
+  )
+
+  render = () => (
+    <SlicerPresenter
+      withSliceSizeValidation={this.withSliceSizeValidation}
+      withDraggerValidation={this.withDraggerValidation}
       hijackFile={this.hijackFile}
+      SLICE_SIZE_MIN_VALUE={SLICE_SIZE_MIN_VALUE}
+      SLICE_SIZE_MAX_VALUE={SLICE_SIZE_MAX_VALUE}
     />
-  }
+  )
 }
 
 export default Form.create()(SliceContainer)
