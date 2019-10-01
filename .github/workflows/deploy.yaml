@@ -20,10 +20,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '10'
-      - name: Install Dependencies
-        run: |
-          npm ci --only=production &&\
-          cd web && npm ci && npm run build
+      - name: Install Dependencies for Server
+        run: npm ci --only=production
+      - name: Install Dependencies for Web
+        working-directory: web
+        run: npm ci && npm run build
       - name: Build Application
         run: npm run build
       - name: Deploy to GAE
