@@ -11,7 +11,7 @@ app.get('/hi', (_, res: Response) => {
 })
 
 if (isProd) {
-  const outputPath = join(__dirname, '../public')
+  const outputPath = join(__dirname, './public')
   app.use('/', Express.static(outputPath))
   app.get('*', (_, res: Response) => res.sendFile(resolve(outputPath, 'index.html')))
 }
