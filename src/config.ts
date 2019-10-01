@@ -12,5 +12,6 @@ const n = (prop: string, defaultValue?: number): number | undefined => (
 
 const PORT = n('PORT', 8080)
 const isProd = s('NODE_ENV') === 'production'
+const isDebug = n('DEBUG', 0) === 1
 
-export { VERSION, PORT, isProd }
+export { VERSION, PORT, isProd, isDebug }

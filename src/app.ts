@@ -1,10 +1,12 @@
 import Express, { Response } from 'express'
 import morgan from 'morgan'
 import { join, resolve } from 'path'
-import { isProd, VERSION } from './config'
+import { isDebug, isProd, VERSION } from './config'
 
 const app = Express()
-app.use(morgan('tiny'))
+if (isDebug) {
+  app.use(morgan('tiny'))
+}
 
 app.get('/hi', (_, res: Response) => {
   res.send(`hi? I'm tools with version ${VERSION}`)

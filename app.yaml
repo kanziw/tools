@@ -3,6 +3,7 @@ runtime: nodejs10
 
 env_variables:
   NODE_ENV: production
+  DEBUG: 0
 
 handlers:
   - url: /.*
