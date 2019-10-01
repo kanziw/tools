@@ -1,6 +1,10 @@
 name: Build
 
-on: [push, pull_request]
+#on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   lint:
@@ -69,7 +73,7 @@ jobs:
         with:
           node-version: '10'
       - name: Install Dependencies for Server
-        run: npm ci --only=production
+        run: npm ci
       - name: Install Dependencies for Web
         working-directory: web
         run: npm ci && npm run build

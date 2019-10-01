@@ -10,18 +10,19 @@ jobs:
   deploy:
     name: Deploy
     runs-on: macOS-10.14
-    container: google/cloud-sdk:264.0.0-alpine
     steps:
       - name: Checkout
         uses: actions/checkout@v1
         with:
           fetch-depth: 1
+      - name: Setup Gcloud SDK
+        run: brew cask install google-cloud-sdk
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
           node-version: '10'
       - name: Install Dependencies for Server
-        run: npm ci --only=production
+        run: npm ci
       - name: Install Dependencies for Web
         working-directory: web
         run: npm ci && npm run build
