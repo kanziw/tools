@@ -9,7 +9,7 @@ on: [push, pull_request]
 jobs:
   deploy:
     name: Deploy
-    runs-on: ubuntu-18.04
+    runs-on: macOS-10.14
     container: google/cloud-sdk:264.0.0-alpine
     steps:
       - name: Checkout
