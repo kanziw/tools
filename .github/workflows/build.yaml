@@ -64,5 +64,10 @@ jobs:
         uses: actions/checkout@v1
         with:
           fetch-depth: 1
-      - name: Docker build
-        run: docker build . -t kanziw/tools-kanziw-dev:$GITHUB_SHA
+      - name: Build Web Application
+        working-directory: web
+        run: |
+          npm ci && npm run build \
+          mv build ../public
+      - name: Build Server Application
+        run: npm ci --only=production
